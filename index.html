@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Bidet Content</title>
+<style>
+  :root{
+    --teal:#0e7c7b; --bg:#f7f9fa; --card:#ffffff; --text:#25333f; --muted:#7a8a96;
+    --line:#e5ebee; --heading:#17324d;
+  }
+  html[data-theme="dark"]{
+    --teal:#45c9c6; --bg:#0f1620; --card:#1a2330; --text:#e8eef4; --muted:#9fb0be;
+    --line:#2a3545; --heading:#f2f6fa;
+  }
+  #mode{position:fixed;top:12px;right:12px;z-index:50;width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(127,127,127,.4);background:var(--card);cursor:pointer;font-size:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.2);line-height:1}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 50px}
+  .kicker{text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--muted)}
+  .bar{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  h1{font-size:26px;font-weight:800;color:var(--heading);margin-top:2px}
+  .subline{font-size:12px;color:var(--muted);margin-top:2px}
+  .spacer{flex:1}
+  .toggle{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .toggle button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+  .toggle button.on{background:#0e7c7b;color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.grid{grid-template-columns:1fr}}
+  a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--text);transition:transform .12s}
+  a.card:hover{transform:translateY(-2px)}
+  .thumb{position:relative;aspect-ratio:3/4;background:linear-gradient(135deg,#17324d,#0e7c7b);display:flex;align-items:center;justify-content:center}
+  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .thumb .ph{color:#fff;opacity:.5;font-size:30px}
+  .thumb .rank{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;z-index:2}
+  .thumb .ptag{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:600;border-radius:6px;padding:2px 7px;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cardbody{padding:8px 10px}
+  .nums{display:flex;justify-content:space-between;align-items:baseline}
+  .rev{font-size:15px;font-weight:800;color:var(--teal)}
+  .views{font-size:12px;color:var(--muted)}
+  .who{font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:30px 0}
+  .foot{font-size:11px;color:var(--muted);margin-top:14px}
+</style>
+</head>
+<body>
+<button id="mode" title="Toggle light/dark mode">🌙</button>
+<div class="wrap">
+  <div class="bar">
+    <div>
+      <div class="kicker">Kalo Data Brief · Updated July 17, 2026</div>
+      <h1>Top Bidet Content</h1>
+      <div class="subline">Top bidet &amp; smart toilet products incl. Clear Rear · videos over $250 revenue · <span id="count"></span></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="toggle">
+      <button id="b1" onclick="setRange(1)">Yesterday</button>
+      <button id="b7" onclick="setRange(7)">7 Days</button>
+      <button id="b30" class="on" onclick="setRange(30)">30 Days</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="foot">Source: Kalodata · TikTok Shop US · Tap a video to watch on TikTok · Revenue/views are per selected window</div>
+</div>
+
+<script>
+const D = window.__D = [
+["7649080420591537422","Easy@Home Portable","06/08/26",43140,"2.4m",7610,"395.6k",336,"14.1k"],
+["7582838127954283789","LUXE NEO 185","12/12/25",21680,"1.7m",700,"62.6k",0,""],
+["7653528990585457934","Elecwish Heated Seat","06/20/26",21610,"571.2k",1090,"25.7k",0,""],
+["7623091929734974751","PHANCIR","03/30/26",16140,"817.8k",7880,"594k",1290,"72.2k"],
+["7616427647752588558","JINXELL","03/12/26",15980,"1.2m",6140,"471.8k",524,"13.6k"],
+["7616610286216170765","LUXE NEO 185","03/13/26",9220,"1m",2790,"270.2k",314,"29.1k"],
+["7648831690000878879","Bidet Sprayer Kit","06/07/26",5740,"333.5k",731,"39k",0,""],
+["7649503832040377630","Bidet Sprayer Kit","06/09/26",5530,"365.9k",607,"33.7k",0,""],
+["7580442769647357198","Easy@Home Portable","12/05/25",4220,"197k",0,"",0,""],
+["7645053900835278111","JINXELL","05/28/26",4190,"196.2k",320,"10.8k",0,""],
+["7598938898424745246","Hibbent","01/24/26",3870,"429.4k",575,"56.6k",0,""],
+["7597568718641712398","Clear Rear","01/20/26",3780,"495.3k",1090,"114.3k",0,""],
+["7598304005504191757","Clear Rear","01/22/26",3730,"519.8k",2340,"349.3k",0,""],
+["7661056619253419295","Elecwish Heated Seat","07/10/26",2760,"82.8k",2760,"82.8k",260,"2.8k"],
+["7605031897923734798","Hibbent","02/09/26",2710,"329.4k",0,"",0,""],
+["7628651128388996382","LUXE NEO 185","04/14/26",2510,"272.7k",829,"85.6k",0,""],
+["7654768457602321694","Luxury Smart Toilet","06/23/26",2510,"18.2k",0,"",0,""],
+["7659101277267168542","Luxury Smart Toilet","07/05/26",2480,"11.7k",758,"4.6k",0,""],
+["7617596840887717134","JINXELL","03/15/26",2430,"151.4k",524,"26.4k",0,""],
+["7651246840943267102","Luxury Smart Toilet","06/14/26",2240,"13.9k",0,"",0,""],
+["7657239192207936798","Easy@Home Portable","06/30/26",1960,"104.3k",1060,"51.4k",0,""],
+["7624631446581349646","Easy@Home Portable","04/03/26",1910,"105.1k",464,"23k",0,""],
+["7557812493549145375","Easy@Home Portable","10/05/25",1820,"90.2k",0,"",0,""],
+["7654619838958046478","JINXELL","06/23/26",1810,"101.4k",320,"17.1k",0,""],
+["7608280866854325518","Clear Rear","02/18/26",1690,"199.2k",464,"41.2k",0,""],
+["7652783348078710029","Easy@Home Portable","06/18/26",1520,"76.9k",879,"41.6k",0,""],
+["7654962969008213262","LUXE NEO 185","06/24/26",1510,"83.3k",0,"",0,""],
+["7649785791828200734","Hibbent","06/10/26",1480,"148.7k",0,"",0,""],
+["7616675762610998559","Hibbent","03/13/26",1390,"160.1k",0,"",0,""],
+["7589475546069781774","LUXE NEO 320","12/29/25",1370,"56.5k",455,"10.6k",0,""],
+["7612812045574032671","Bidet Sprayer Kit","03/02/26",1330,"75.9k",322,"16.7k",0,""],
+["7656173747715443999","Clear Rear","06/27/26",1320,"130.1k",364,"36.3k",0,""],
+["7631701873183018254","LUXE NEO 320","04/22/26",1250,"40.3k",772,"13.8k",0,""],
+["7642917116143815949","JINXELL","05/23/26",1250,"63.1k",611,"32.5k",0,""],
+["7659788978622582047","Luxury Smart Toilet","07/07/26",1210,"5.5k",1210,"4.8k",0,""],
+["7659851710961044749","Elecwish Heated Seat","07/07/26",1200,"20.7k",0,"",0,""],
+["7598384551743769869","Easy@Home Portable","01/22/26",1180,"57k",272,"12.4k",0,""],
+["7610522646471658766","Easy@Home Portable","02/24/26",1160,"58.7k",368,"16.9k",0,""],
+["7480616143728692510","PHANCIR","03/11/25",1160,"18.4k",0,"",0,""],
+["7588723107968404766","Hibbent","12/27/25",1020,"101.2k",0,"",0,""],
+["7649854302185327886","JINXELL","06/10/26",959,"44k",0,"",0,""],
+["7571591575847931167","Hibbent","11/11/25",928,"94.3k",0,"",0,""],
+["7654389138598219039","Hibbent","06/28/26",912,"193k",0,"",0,""],
+["7616768910834076942","Easy@Home Portable","03/13/26",911,"44.2k",0,"",0,""],
+["7644418807796190477","JINXELL","05/27/26",902,"41.4k",727,"32.9k",0,""],
+["7655947128950295839","Luxury Smart Toilet","06/27/26",898,"6k",0,"",0,""],
+["7660704543180606733","JINXELL","07/09/26",785,"45.9k",785,"45.3k",0,""],
+["7659240173317786910","Easy@Home Portable","07/05/26",755,"60.9k",0,"",0,""],
+["7656159081400405279","Bidet Sprayer Kit","06/27/26",668,"43k",264,"12.9k",0,""],
+["7632729085126462750","PHANCIR","04/25/26",668,"18.6k",0,"",0,""],
+["7661715602133749023","Elecwish Heated Seat","07/12/26",667,"8.9k",667,"8.9k",260,"3.9k"],
+["7635330176569642270","Bidet Sprayer Kit","05/02/26",652,"33.9k",0,"",0,""],
+["7644749517128011022","Bidet Sprayer Kit","05/27/26",646,"38.3k",0,"",0,""],
+["7617849076687637774","JINXELL","03/16/26",638,"35.9k",0,"",0,""],
+["7496899965482978590","LUXE NEO 185","04/24/25",626,"49.4k",0,"",0,""],
+["7633201086668590367","Bidet Sprayer Kit","04/26/26",617,"33.5k",0,"",0,""],
+["7653096488444136735","JINXELL","06/19/26",610,"26.1k",0,"",0,""],
+["7623297662367878413","Bidet Sprayer Kit","03/31/26",604,"38.5k",0,"",0,""],
+["7659407860622724366","Clear Rear","07/06/26",597,"93.8k",463,"76.3k",0,""],
+["7630947033221795085","Bidet Sprayer Kit","04/20/26",573,"29.4k",0,"",0,""],
+["7658896126246014222","Clear Rear","07/05/26",562,"106.6k",0,"",0,""],
+["7646987843436301599","Bidet Sprayer Kit","06/02/26",525,"26.8k",0,"",0,""],
+["7646459125383089438","PHANCIR","06/01/26",510,"5.3k",0,"",0,""],
+["7585647950970342670","LUXE NEO 185","12/19/25",473,"48.4k",0,"",0,""],
+["7582790936359357710","LUXE NEO 185","12/11/25",472,"43.4k",0,"",0,""],
+["7659408175220673806","Clear Rear","07/06/26",462,"56.8k",0,"",0,""],
+["7657346007780363551","Luxury Smart Toilet","06/30/26",449,"2.2k",0,"",0,""],
+["7657473838908771614","Luxury Smart Toilet","07/01/26",449,"2.1k",0,"",0,""],
+["7654874200871619871","Luxury Smart Toilet","06/24/26",449,"4k",0,"",0,""],
+["7538731425395232030","Hibbent","08/15/25",426,"41.5k",0,"",0,""],
+["7659188273356508447","Elecwish Heated Seat","07/05/26",402,"18.2k",0,"",0,""],
+["7624283107943779597","LUXE NEO 185","04/02/26",396,"27.7k",0,"",0,""],
+["7586707681449200909","LUXE NEO 185","12/22/25",344,"18k",0,"",0,""],
+["7652885339962412302","LUXE NEO 185","06/18/26",342,"29.4k",0,"",0,""],
+["7658894799084244237","Clear Rear","07/05/26",330,"55.3k",0,"",0,""],
+["7662371268771007775","Elecwish Heated Seat","07/14/26",278,"2.9k",278,"2.9k",0,""],
+["7659741996306697485","Clear Rear","07/07/26",267,"35.4k",0,"",0,""],
+["7660248115831721230","Clear Rear","07/08/26",265,"35.7k",0,"",0,""],
+["7546140015030586654","Hibbent","09/04/25",262,"32.1k",0,"",0,""]
+];
+const fmt = r => r >= 1000 ? '$' + (r/1000).toFixed(2).replace(/\.?0+$/,'') + 'k' : '$' + r.toFixed(0);
+const meta = {};
+function setRange(n){
+  ['b1','b7','b30'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById(n===1?'b1':n===7?'b7':'b30').classList.add('on');
+  const o = n===1 ? 7 : n===7 ? 5 : 3;
+  const list = D.filter(v=>v[o]>250).sort((a,b)=>b[o]-a[o]);
+  document.getElementById('count').textContent = list.length + ' videos';
+  document.getElementById('grid').innerHTML = list.length ? list.map((v,i)=>`
+    <a class="card" id="c_${v[0]}" href="https://www.tiktok.com/@i/video/${v[0]}" target="_blank">
+      <div class="thumb"><span class="ph">▶</span><span class="rank">#${i+1}</span><span class="ptag">${v[1]}</span></div>
+      <div class="cardbody">
+        <div class="nums"><span class="rev">${fmt(v[o])}</span><span class="views">${v[o+1]}${v[o+1]?' views':''}</span></div>
+        <div class="who" id="w_${v[0]}">${v[2]}</div>
+      </div>
+    </a>`).join('') : '<div class="empty">No videos over $250 revenue in this window.</div>';
+  list.forEach(v=>hydrate(v[0], v[2]));
+}
+function applyMeta(id, pub){
+  const m = meta[id]; if(!m) return;
+  const card = document.getElementById('c_'+id);
+  if(!card) return;
+  if(m.url) card.href = m.url;
+  const th = card.querySelector('.thumb');
+  if(m.thumb && !th.querySelector('img')){ const img=new Image(); img.onload=()=>th.prepend(img); img.src=m.thumb; }
+  if(m.handle) document.getElementById('w_'+id).textContent = m.handle + ' · ' + pub;
+}
+function hydrate(id, pub){
+  if(meta[id]){ applyMeta(id, pub); return; }
+  fetch('https://www.tiktok.com/oembed?url=' + encodeURIComponent('https://www.tiktok.com/@i/video/' + id))
+    .then(r=>r.json())
+    .then(j=>{
+      const handle = (j.author_url||'').split('/@')[1] ? '@'+j.author_url.split('/@')[1] : '';
+      meta[id] = {thumb: j.thumbnail_url||'', handle, url: j.author_url ? j.author_url + '/video/' + id : ''};
+      applyMeta(id, pub);
+    }).catch(()=>{ meta[id] = {}; });
+}
+setRange(30);
+const mBtn = document.getElementById('mode');
+function applyMode(m){
+  document.documentElement.dataset.theme = m;
+  mBtn.textContent = m === 'dark' ? '☀️' : '🌙';
+  try{ localStorage.setItem('kalo-theme', m); }catch(e){}
+}
+mBtn.onclick = () => applyMode(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+let saved = 'light'; try{ saved = localStorage.getItem('kalo-theme') || 'light'; }catch(e){}
+applyMode(saved);
+</script>
+<script>(function(){
+window.__RISING_SINCE = "2026-07-10";
+window.__PREV_RISING = ["7661056619253419295","7660704543180606733","7661715602133749023"];
+function pd(s){var p=s.split("/");return new Date(2000+ +p[2], +p[0]-1, +p[1]);}
+function fmt(n){if(n<1000)return ""+n;var s=(n/1000).toFixed(2);while(s.indexOf(".")>-1&&(s.charAt(s.length-1)==="0"||s.charAt(s.length-1)==="."))s=s.slice(0,-1);return s+"k";}
+var bar=document.querySelector(".toggle");
+var rb=document.createElement("button"); rb.id="risingBtn"; rb.textContent="Rising";
+rb.onclick=function(){window.setRange("rising");};
+if(bar) bar.appendChild(rb);
+var _orig=window.setRange;
+window.setRange=function(x){ if(x==="rising"){ if(bar) bar.querySelectorAll("button").forEach(function(b){b.classList.remove("on");}); rb.classList.add("on"); return showRising(); } rb.classList.remove("on"); return _orig(x); };
+function showRising(){
+var sc=new Date(window.__RISING_SINCE+"T00:00:00"); var prev=window.__PREV_RISING||[];
+var list=(window.__D||[]).filter(function(v){return v[3]>250 && pd(v[2])>=sc;});
+list.sort(function(a,b){return pd(b[2])-pd(a[2]) || b[3]-a[3];});
+document.getElementById("count").textContent=list.length+" rising";
+document.getElementById("grid").innerHTML = list.length ? list.map(function(v){
+var pin = prev.indexOf(v[0])===-1;
+var h="<a class=\"card\" id=\"c_"+v[0]+"\" href=\"https://www.tiktok.com/@i/video/"+v[0]+"\" target=\"_blank\">";
+h+="<div class=\"thumb\"><span class=\"ph\">\u25B6</span>"+(pin?"<span class=\"rank\">\uD83D\uDCCC</span>":"")+"<span class=\"ptag\">"+v[1]+"</span></div>";
+h+="<div class=\"cardbody\"><div class=\"nums\"><span class=\"rev\">$"+fmt(v[3])+"</span><span class=\"views\">"+v[4]+" views</span></div>";
+h+="<div class=\"who\" id=\"w_"+v[0]+"\">"+v[2]+"</div></div></a>";
+return h;
+}).join("") : "<div class=\"empty\">No rising videos in the last 7 days.</div>";
+if(window.hydrate) list.forEach(function(v){window.hydrate(v[0], v[2]);});
+}
+window.showRising=showRising;
+})();</script>
+</body>
+</html>
