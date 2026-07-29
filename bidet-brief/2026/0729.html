@@ -161,6 +161,7 @@ var sc=new Date(window.__RISING_SINCE+"T00:00:00"); var prev=window.__PREV_RISIN
 var list=(window.__D||[]).filter(function(v){return v[3]>250 && pd(v[2])>=sc;});
 list.sort(function(a,b){return pd(b[2])-pd(a[2]) || b[3]-a[3];});
 document.getElementById("count").textContent=list.length+" rising";
+document.getElementById("foot").textContent="Source: Kalodata · TikTok Shop US · Tap a video to watch on TikTok · Revenue/views are per selected window";
 document.getElementById("grid").innerHTML = list.length ? list.map(function(v){
 var pin = prev.indexOf(v[0])===-1;
 var h="<a class=\"card\" id=\"c_"+v[0]+"\" href=\"https://www.tiktok.com/@i/video/"+v[0]+"\" target=\"_blank\">";
